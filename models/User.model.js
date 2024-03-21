@@ -5,19 +5,19 @@ const userSchema = new Schema(
   {
     email: {
       type: String,
-      required: [true, "Email is required."],
-      unique: true,
-      lowercase: true,
-      trim: true,
     },
     password: {
       type: String,
-      required: [true, "Password is required."],
     },
-    name: {
+    username: {
       type: String,
-      required: [true, "Name is required."],
     },
+    campus: {
+      type: String,
+    },
+    course: {
+      type: String,
+    }
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

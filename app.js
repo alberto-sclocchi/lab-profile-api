@@ -2,6 +2,7 @@
 // https://www.npmjs.com/package/dotenv
 require("dotenv").config();
 
+
 // ℹ️ Connects to the database
 require("./db");
 
@@ -13,6 +14,7 @@ const app = express();
 
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
+require("./config/session")(app);
 
 // 👇 Start handling routes here
 const indexRoutes = require("./routes/index.routes");
