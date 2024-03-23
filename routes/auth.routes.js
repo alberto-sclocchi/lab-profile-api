@@ -125,11 +125,13 @@ router.post("/verify", isAuthenticated, (req, res, next) => {
   // isAuthenticated middleware and is made available on `req.payload`
   console.log(`req.payload`, req.payload);
   req.session.currentUser = req.payload;
+
   // Send back the token payload object containing the user data
   res.json(req.session.currentUser);
 });
 
 router.get("/currentUser", (req, res) => {
+  console.log("Current user:", req.session.currentUser);
   if(req.session.currentUser){
     res.json(req.session.currentUser);
   } else {
@@ -137,8 +139,14 @@ router.get("/currentUser", (req, res) => {
   }
 });
 
-router.post("/logout", (req, res, next) =>{
-  req.session.destroy()
+router.get("/logout", (req, res, next) =>{
+  if(req.session.currentUser){
+    req.session.currentUser = null;
+    req.session.destroy();
+    res.json("Successfully Logged Out")
+  } else {
+    res.json("Current user not defined");
+  }
 });
 
 module.exports = router;
